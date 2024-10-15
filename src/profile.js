@@ -1,7 +1,6 @@
 import { 
   fetchUserIdQuery, 
   fetchUserDetailsQuery, 
-  // fetchCurrentProjectQuery, 
   fetchAuditDetailsQuery, 
   fetchExperienceQuery, 
   fetchSkillsQuery, 
@@ -43,7 +42,6 @@ const initialize = async () => {
     const userId = await fetchUserId();
     const userDetails = await fetchUserDetails(userId);
     displayUserInfo(userDetails);
-    // await fetchAndDisplayCurrentProject();
     await fetchAndDisplayRecentProjects();
     await refreshProgressBars(userId);
     await fetchAndDisplayExperience(userId);
@@ -55,13 +53,13 @@ const initialize = async () => {
   }
 };
 
-
 // Fetch Functions
 const fetchUserId = async () => {
   const response = await getData(fetchUserIdQuery);
   console.log(response);
   return response.data.user[0].id;
 };
+
 // Run the authentication check and initialize
 initialize();
 
@@ -82,7 +80,7 @@ const displayUserInfo = (userDetails) => {
     `Campus ID: ${userDetails.login}`,
   ];
 
-  const userInfoContainer = document.getElementById('user-info-list');
+  const userInfoContainer = document.getElementById('user-info-container');
   userInfoList.forEach(info => {
     const listElement = document.createElement('li');
     listElement.textContent = info;
@@ -90,15 +88,14 @@ const displayUserInfo = (userDetails) => {
   });
 
   const fullName = `${userDetails.firstName} ${userDetails.lastName}`;
-  document.getElementById('welcome-message').textContent = `Welcome to your dashboard, ${fullName}`;
+  document.getElementById('dashboard-welcome-message').textContent = `Welcome to your dashboard, ${fullName}`;
 };
-
 
 const fetchAndDisplayRecentProjects = async () => {
   const response = await getData(fetchRecentProjectsQuery);
   const recentProjects = response.data.transaction.map(item => `${item.object.type} — ${item.object.name}`);
   
-  const recentProjectsContainer = document.getElementById('last-activity-list');
+  const recentProjectsContainer = document.getElementById('recent-activity-container');
   recentProjectsContainer.innerHTML = ''; // Clear existing items
   recentProjects.forEach(project => {
     const projectElement = document.createElement('li');
@@ -123,12 +120,12 @@ const refreshProgressBars = async (userId) => {
   const upColor = auditInfo.totalUp >= auditInfo.totalDown ? '#28a745' : '#dc3545';
   const downColor = auditInfo.totalDown >= auditInfo.totalUp ? '#17a2b8' : '#ffc107';
 
-  document.getElementById('audit-ratio-text').textContent = formattedAuditRatio;
-  createProgressBar('#total-audits-done-progress', upPercentage, upColor);
-  createProgressBar('#total-audits-received-progress', downPercentage, downColor);
+  document.getElementById('audit-ratio-value').textContent = formattedAuditRatio;
+  createProgressBar('#completed-audits-progress', upPercentage, upColor);
+  createProgressBar('#received-audits-progress', downPercentage, downColor);
   
-  document.getElementById('total-audits-done-text').textContent = totalUpFormatted;
-  document.getElementById('total-audits-received-text').textContent = totalDownFormatted;
+  document.getElementById('completed-audits-text').textContent = totalUpFormatted;
+  document.getElementById('received-audits-text').textContent = totalDownFormatted;
 };
 
 const fetchAuditDetails = async (userId) => {
@@ -143,7 +140,7 @@ const fetchAndDisplayExperience = async (userId) => {
     ? `${(experiencePoints / 1000000).toFixed(2)} MB`
     : `${Math.floor(experiencePoints / 1000)} kB`;
   
-  document.getElementById('xp-value').textContent = experienceText;
+  document.getElementById('experience-points').textContent = experienceText;
 };
 
 const fetchAndDisplaySkills = async () => {
@@ -158,7 +155,7 @@ const fetchAndDisplaySkills = async () => {
   const skillLabels = Object.keys(skillData).map(formatSkill);
   const skillValues = Object.values(skillData);
   
-  renderRadarChart(skillValues, skillLabels, '#technical-skills-chart', 'Technical Skills');
+  renderRadarChart(skillValues, skillLabels, '#skills-radar-chart', 'Technical Skills');
 };
 
 // Chart Functions
@@ -177,7 +174,6 @@ function renderRadarChart(data, labels, containerSelector, title) {
 
   const group = svg.append('g').attr('transform', `translate(${dimensions.width / 2}, ${dimensions.height / 2})`);
 
- 
   // Draw axes and radar shapes
   for (let i = 0; i < 5; i++) {
     group.append('circle')
@@ -221,12 +217,10 @@ function createProgressBar(selector, percentage, color) {
   svg.append('rect').attr('width', (percentage / 100) * width).attr('height', height).attr('fill', color); // Foreground
 }
 
-
-
 // Event Listeners
 const setupEventListeners = () => {
   window.addEventListener('resize', refreshProgressBars);
-  document.getElementById('logout-button').addEventListener('click', handleLogout);
+  document.getElementById('logout-link').addEventListener('click', handleLogout);
 };
 
 // Logout Functionality

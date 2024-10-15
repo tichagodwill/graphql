@@ -22,8 +22,8 @@
         <!--  Header -->
         <header class="fixed top-0 left-0 right-0 z-10 bg-gray-800 bg-opacity-80 p-4 md:p-6 lg:p-8 shadow-lg rounded-lg">
             <div class="flex justify-between items-center">
-                <h2 class="text-lg md:text-2xl lg:text-3xl font-semibold text-white tracking-wider leading-tight" id="welcome-message">Welcome</h2>
-                <a href="#" class="text-red-500 text-sm md:text-lg lg:text-xl hover:text-red-300 font-medium transition duration-300 ease-in-out transform hover:scale-110" id="logout-button">Log Out</a>
+                <h2 class="text-lg md:text-2xl lg:text-3xl font-semibold text-white tracking-wider leading-tight" id="dashboard-welcome-message">Welcome</h2>
+                <a href="#" class="text-red-500 text-sm md:text-lg lg:text-xl hover:text-red-300 font-medium transition duration-300 ease-in-out transform hover:scale-110" id="logout-link">Log Out</a>
             </div>
         </header>
 
@@ -35,7 +35,7 @@
                     <h3 class="text-xl font-semibold text-white flex items-center space-x-2">
                         <span>User Information</span><i class="ml-2 text-yellow-400 fas fa-info-circle bounce"></i>
                     </h3>
-                    <ul class="list-none mt-4 space-y-2" id="user-info-list">
+                    <ul class="list-none mt-4 space-y-2" id="user-info-container">
                         <!-- Add content dynamically -->
                     </ul>
                 </div>
@@ -45,7 +45,7 @@
                     <h3 class="text-xl font-semibold text-white flex items-center space-x-2">
                         <span>Your XP Level</span><i class="ml-2 text-yellow-400 fas fa-star bounce"></i>
                     </h3>
-                    <p class="text-lg text-gray-300 mt-2" id="xp-value">You have <strong class="text-white">0 XP</strong>! Keep going!</p>
+                    <p class="text-lg text-gray-300 mt-2" id="experience-points">You have <strong class="text-white">0 XP</strong>! Keep going!</p>
                 </div>
 
                 <!-- Audit Info Card -->
@@ -55,17 +55,17 @@
                     </h3>
                     <div class="mt-4 space-y-3">
                         <h4 class="text-lg text-white">Total Audits Completed</h4>
-                        <svg id="total-audits-done-progress" width="100%" height="20"></svg>
-                        <p class="text-md text-white mt-2" id="total-audits-done-text"></p>
+                        <svg id="completed-audits-progress" width="100%" height="20"></svg>
+                        <p class="text-md text-white mt-2" id="completed-audits-text"></p>
                     </div>
                     <div class="mt-4 space-y-3">
                         <h4 class="text-lg text-white">Total Audits Received</h4>
-                        <svg id="total-audits-received-progress" width="100%" height="20"></svg>
-                        <p class="text-md text-white mt-2" id="total-audits-received-text"></p>
+                        <svg id="received-audits-progress" width="100%" height="20"></svg>
+                        <p class="text-md text-white mt-2" id="received-audits-text"></p>
                     </div>
                     <div class="mt-4">
                         <h4 class="text-lg text-white">Audit Ratio</h4>
-                        <h4 class="text-xl font-semibold text-white" id="audit-ratio-text">3/5</h4>
+                        <h4 class="text-xl font-semibold text-white" id="audit-ratio-value">3/5</h4>
                     </div>
                 </div>
             </section>
@@ -75,7 +75,7 @@
                 <h3 class="text-xl font-semibold text-white flex items-center space-x-2">
                     <span>Recent Activities</span><i class="ml-2 text-yellow-400 fas fa-history bounce"></i>
                 </h3>
-                <ul class="list-none mt-4" id="last-activity-list"></ul>
+                <ul class="list-none mt-4" id="recent-activity-container"></ul>
             </section>
 
             <!-- Skills Overview -->
@@ -85,31 +85,10 @@
                 </h3>
                 <div class="flex justify-center">
                     <div class="w-full md:w-1/2">
-                        <svg id="technical-skills-chart" width="100%" height="500"></svg>
+                        <svg id="skills-radar-chart" width="100%" height="500"></svg>
                     </div>
                 </div>
             </section>
-
-            <!-- Audit Ratio Section
-            <section class="mt-6 bg-gray-700 shadow-lg rounded-lg p-6 transform hover:scale-105 hover:shadow-2xl hover:bg-gray-800 transition-all duration-300 ease-in-out border-l-4 border-yellow-400">
-                <h3 class="text-2xl font-semibold text-white flex items-center space-x-2">
-                    <span>Audit Ratio</span>
-                    <i class="ml-2 text-yellow-400 fas fa-balance-scale bounce"></i>
-                </h3>
-
-                Audit Ratio Section Styling
-                <div class="mt-4 bg-gray-800 rounded-lg p-4">
-                    <p class="text-lg text-gray-400 mb-2">Completed Audits / Received Audits</p>
-                    
-                    Audit Ratio Text with custom styling
-                    <h4 class="text-4xl font-extrabold text-green-400 mb-2" id="audit-ratio-text">3/5</h4>
-
-                    Custom Progress Bar
-                    <div class="relative h-4 w-full bg-gray-600 rounded-full">
-                        <div class="absolute left-0 top-0 h-full bg-green-400 rounded-full" style="width: 60%;"></div>
-                    </div>
-                </div>
-            </section> -->
         </main>
     </div>
 
