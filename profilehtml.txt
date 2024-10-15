@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="./styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <title>Dashboard Overview</title>
+    <style>
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .fade-in { animation: fadeIn 0.5s ease-in-out; }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+        .bounce { animation: bounce 3s infinite; }
+    </style>
+</head>
+<body class="text-gray-200 bg-slate-700">
+    <div class="mx-auto p-5 container">
+        <!-- Fixed Header -->
+        <header class="fixed top-0 left-0 right-0 z-10 p-5 shadow-custom bg-muted-blue text-light-gray">
+            <div class="flex justify-between items-center">
+                <h2 class="text-2xl font-semibold text-white fade-in" id="welcome-message"></h2>
+                <a href="#" class="text-red-500 text-lg hover:underline transition fade-in" id="logout-button">Log Out</a>
+            </div>
+        </header>
+
+        <main class="mt-40">
+            <!-- Info Cards -->
+            <section class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div class="bg-muted-blue shadow-lg rounded-lg p-4 transition-transform transform hover:scale-105 fade-in" id="user-info">
+                    <h3 class="flex items-center mb-2 text-xl font-semibold">
+                        User Information <i class="ml-2 text-yellow-400 fas fa-info-circle bounce"></i>
+                    </h3>
+                    <ul class="list-none" id="user-info-list"></ul>
+                </div>
+
+                <div class="bg-muted-blue shadow-lg rounded-lg p-4 transition-transform transform hover:scale-105 fade-in" id="xp">
+                    <h3 class="flex items-center mb-2 text-xl font-semibold">
+                        Your XP Level <i class="ml-2 text-yellow-400 fas fa-star bounce"></i>
+                    </h3>
+                    <p class="text-lg" id="xp-value">You have <strong>0 XP</strong>! Keep going!</p>
+                </div>
+
+                <!-- Info Card for Audit Insights -->
+                <div class="bg-muted-blue shadow-lg rounded-lg p-4 transition-transform transform hover:scale-105 fade-in" id="audit-info-card">
+                    <h3 class="flex items-center mb-2 text-xl font-semibold">
+                        Audit Information <i class="ml-2 text-yellow-400 fas fa-file-alt bounce"></i>
+                    </h3>
+
+                    <div class="mt-3">
+                        <h4 class="text-lg">Total Audits Completed <i class="ml-1 fas fa-arrow-up"></i></h4>
+                        <div class="relative w-full bg-gray-200 h-2 mt-2 rounded">
+                            <div id="total-audits-done-progress" class="absolute h-2 bg-green-500" style="width: 70%;"></div>
+                        </div>
+                        <p class="text-md mt-2" id="total-audits-done-text"></p>
+                    </div>
+                    <div class="mt-3">
+                        <h4 class="text-lg">Total Audits Received <i class="ml-1 fas fa-arrow-down"></i></h4>
+                        <div class="relative w-full bg-muted-blue h-2 mt-2 rounded">
+                            <div id="total-audits-received-progress" class="absolute h-2 bg-blue-500" style="width: 50%;"></div>
+                        </div>
+                        <p class="text-md mt-2" id="total-audits-received-text"></p>
+                    </div>
+                    <div class="mt-3">
+                        <h4 class="text-lg">Audit Ratio</h4>
+                        <h4 class="text-xl font-semibold" id="audit-ratio-text"></h4>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Recent Activity -->
+            <section class="mt-4 bg-muted-blue shadow-lg rounded-lg p-4 transition-transform transform hover:scale-105 fade-in" id="last-activity">
+                <h3 class="flex items-center mb-2 text-xl font-semibold">
+                    Recent Activities <i class="ml-2 text-yellow-400 fas fa-history bounce"></i>
+                </h3>
+                <ul class="list-none" id="last-activity-list"></ul>
+            </section>
+
+            <!-- Skills Overview -->
+            <section class="mt-4 bg-muted-blue shadow-lg rounded-lg p-4 transition-transform transform hover:scale-105 fade-in" id="skills">
+                <h3 class="flex justify-center items-center mb-2 text-xl font-semibold text-center">
+                   Technical skills <i class="ml-2 text-yellow-400 fas fa-tools bounce"></i>
+                </h3>
+                <!-- <ul class="list-none mb-4" id="skills-list"></ul> -->
+                <div class="flex justify-center space-x-4">
+                    <div class="w-full md:w-1/2">
+                        <svg id="technical-skills-chart" width="100%" height="500"></svg>
+                    </div>
+                    <!-- <div class="w-full md:w-1/2">
+                        <svg id="technologies-chart" width="100%" height="500"></svg>
+                    </div> -->
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script type="module" src="profile.js" defer></script>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+</body>
+</html>

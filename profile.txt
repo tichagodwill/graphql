@@ -9,20 +9,18 @@ import {
 } from './queries.js';
 
 const endpoint = 'https://learn.reboot01.com/api/graphql-engine/v1/graphql';
-const jwt = localStorage.getItem('token');
+const token = localStorage.getItem('jwt');
 
 // Function to get data from a GraphQL API
 const getData = async (query) => {
-  console.log(jwt);
   const response = await fetch(endpoint, {
     method: 'POST',
     headers: {
-      'Authorization': `Bearer ${jwt}`,
+      'Authorization': `Bearer ${token}`,
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({ query })
   });
-  
   return response.json();
 };
 
@@ -59,7 +57,6 @@ const initialize = async () => {
 // Fetch Functions
 const fetchUserId = async () => {
   const response = await getData(fetchUserIdQuery);
-  console.log(response);
   return response.data.user[0].id;
 };
 // Run the authentication check and initialize

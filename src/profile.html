@@ -3,112 +3,117 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="./styles.css">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.0.4/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <title>User Portal</title>
+    <title>Dashboard Overview</title>
     <style>
-        /* Custom animations */
-        @keyframes appear {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-        .fade-in { animation: fadeIn 0.5s ease-in-out; }
-        
         @keyframes bounce {
             0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
             40% { transform: translateY(-10px); }
             60% { transform: translateY(-5px); }
         }
-        .jump { animation: jump 1s infinite; }
+        .bounce {
+            animation: bounce 3s infinite;
+        }
     </style>
 </head>
-<body class="text-light-gray bg-dark-slate">
-    <div class="container mx-auto p-5">
-        <!-- Sticky Header -->
-        <header class="fixed top-0 left-0 right-0 z-10 p-5 shadow-light bg-blue-muted">
+<body class="bg-gray-900 text-gray-200">
+    <div class="max-w-7xl mx-auto p-6">
+        <!--  Header -->
+        <header class="fixed top-0 left-0 right-0 z-10 bg-gray-800 bg-opacity-80 p-4 md:p-6 lg:p-8 shadow-lg rounded-lg">
             <div class="flex justify-between items-center">
-                <h2 class="text-2xl font-bold text-white appear" id="greeting-message"></h2>
-                <a href="#" class="text-red-500 text-lg hover:underline transition appear" id="sign-out-button">Sign Out</a>
+                <h2 class="text-lg md:text-2xl lg:text-3xl font-semibold text-white tracking-wider leading-tight" id="welcome-message">Welcome</h2>
+                <a href="#" class="text-red-500 text-sm md:text-lg lg:text-xl hover:text-red-300 font-medium transition duration-300 ease-in-out transform hover:scale-110" id="logout-button">Log Out</a>
             </div>
         </header>
 
-        <main class="mt-40">
-            <!-- Info Sections -->
+        <main class="mt-24 md:mt-32 lg:mt-40">
+            <!-- Info Cards -->
             <section class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <div class="bg-blue-muted shadow-lg rounded-lg p-4 transition-transform transform hover:scale-105 appear" id="account-details">
-                    <h3 class="flex items-center mb-2 text-xl font-bold">
-                        Account Details <i class="ml-2 text-yellow-400 fas fa-info-circle jump"></i>
+                <!-- User Info Card -->
+                <div class="bg-gray-700 shadow-lg rounded-lg p-6 transform hover:scale-105 hover:shadow-2xl hover:bg-gray-800 transition-all duration-300 ease-in-out border-l-4 border-yellow-400">
+                    <h3 class="text-xl font-semibold text-white flex items-center space-x-2">
+                        <span>User Information</span><i class="ml-2 text-yellow-400 fas fa-info-circle bounce"></i>
                     </h3>
-                    <ul class="list-none" id="account-list"></ul>
+                    <ul class="list-none mt-4 space-y-2" id="user-info-list">
+                        <!-- Add content dynamically -->
+                    </ul>
                 </div>
 
-                <div class="bg-blue-muted shadow-lg rounded-lg p-4 transition-transform transform hover:scale-105 appear" id="experience-level">
-                    <h3 class="flex items-center mb-2 text-xl font-bold">
-                        Experience Level <i class="ml-2 text-yellow-400 fas fa-star jump"></i>
+                <!-- XP Info Card -->
+                <div class="bg-gray-700 shadow-lg rounded-lg p-6 transform hover:scale-105 hover:shadow-2xl hover:bg-gray-800 transition-all duration-300 ease-in-out border-l-4 border-blue-400">
+                    <h3 class="text-xl font-semibold text-white flex items-center space-x-2">
+                        <span>Your XP Level</span><i class="ml-2 text-yellow-400 fas fa-star bounce"></i>
                     </h3>
-                    <p class="text-lg" id="experience-value">You have <strong>0 XP</strong>! Keep it up!</p>
+                    <p class="text-lg text-gray-300 mt-2" id="xp-value">You have <strong class="text-white">0 XP</strong>! Keep going!</p>
                 </div>
 
-                <div class="bg-muted-blue shadow-lg rounded-lg p-4 transition-transform transform hover:scale-105 fade-in" id="current-project">
-                    <h3 class="flex items-center mb-2 text-xl font-semibold">
-                        Current Project <i class="ml-2 text-yellow-400 fas fa-tasks bounce"></i>
+                <!-- Audit Info Card -->
+                <div class="bg-gray-700 shadow-lg rounded-lg p-6 transform hover:scale-105 hover:shadow-2xl hover:bg-gray-800 transition-all duration-300 ease-in-out border-l-4 border-green-400">
+                    <h3 class="text-xl font-semibold text-white flex items-center space-x-2">
+                        <span>Audit Information</span><i class="ml-2 text-yellow-400 fas fa-file-alt bounce"></i>
                     </h3>
-                    <p class="text-lg" id="project-name">You're working on <strong>Project Title</strong>.</p>
+                    <div class="mt-4 space-y-3">
+                        <h4 class="text-lg text-white">Total Audits Completed</h4>
+                        <svg id="total-audits-done-progress" width="100%" height="20"></svg>
+                        <p class="text-md text-white mt-2" id="total-audits-done-text"></p>
+                    </div>
+                    <div class="mt-4 space-y-3">
+                        <h4 class="text-lg text-white">Total Audits Received</h4>
+                        <svg id="total-audits-received-progress" width="100%" height="20"></svg>
+                        <p class="text-md text-white mt-2" id="total-audits-received-text"></p>
+                    </div>
+                    <div class="mt-4">
+                        <h4 class="text-lg text-white">Audit Ratio</h4>
+                        <h4 class="text-xl font-semibold text-white" id="audit-ratio-text">3/5</h4>
+                    </div>
                 </div>
             </section>
 
-            <!-- Recent Activities -->
-            <section class="mt-4 bg-blue-muted shadow-lg rounded-lg p-4 transition-transform transform hover:scale-105 appear" id="recent-activities">
-                <h3 class="flex items-center mb-2 text-xl font-bold">
-                    Recent Activities <i class="ml-2 text-yellow-400 fas fa-history jump"></i>
+            <!-- Recent Activity -->
+            <section class="mt-6 bg-gray-700 shadow-lg rounded-lg p-6 transform hover:scale-105 hover:shadow-2xl hover:bg-gray-800 transition-all duration-300 ease-in-out border-l-4 border-purple-400" id="last-activity">
+                <h3 class="text-xl font-semibold text-white flex items-center space-x-2">
+                    <span>Recent Activities</span><i class="ml-2 text-yellow-400 fas fa-history bounce"></i>
                 </h3>
-                <ul class="list-none" id="activities-list"></ul>
+                <ul class="list-none mt-4" id="last-activity-list"></ul>
             </section>
 
             <!-- Skills Overview -->
-            <section class="mt-4 bg-slate-200 shadow-lg rounded-lg p-4 transition-transform transform hover:scale-105 fade-in" id="skills">
-                <h3 class="flex justify-center items-center mb-2 text-xl font-semibold text-center">
-                    Skills Overview <i class="ml-2 text-yellow-400 fas fa-tools bounce"></i>
+            <section class="mt-6 bg-gray-700 shadow-lg rounded-lg p-6 transform hover:scale-105 hover:shadow-2xl hover:bg-gray-800 transition-all duration-300 ease-in-out border-l-4 border-red-400" id="skills">
+                <h3 class="text-xl font-semibold text-white flex justify-center items-center space-x-2">
+                    <span>Technical Skills</span><i class="ml-2 text-yellow-400 fas fa-tools bounce"></i>
                 </h3>
-                <ul class="list-none mb-4" id="skills-list"></ul>
-                <div class="flex justify-center space-x-4">
+                <div class="flex justify-center">
                     <div class="w-full md:w-1/2">
-                        <svg id="skills-chart" width="100%" height="500"></svg>
-                    </div>
-                    <div class="w-full md:w-1/2">
-                        <svg id="technologies-chart" width="100%" height="500"></svg>
+                        <svg id="technical-skills-chart" width="100%" height="500"></svg>
                     </div>
                 </div>
             </section>
 
-            <!-- Audit Information -->
-            <section class="mt-4 bg-muted-blue shadow-lg rounded-lg p-4 transition-transform transform hover:scale-105 fade-in" id="audit-info">
-                <h3 class="flex items-center mb-2 text-xl font-semibold">
-                    Audit Insights <i class="ml-2 text-yellow-400 fas fa-file-alt bounce"></i>
+            <!-- Audit Ratio Section
+            <section class="mt-6 bg-gray-700 shadow-lg rounded-lg p-6 transform hover:scale-105 hover:shadow-2xl hover:bg-gray-800 transition-all duration-300 ease-in-out border-l-4 border-yellow-400">
+                <h3 class="text-2xl font-semibold text-white flex items-center space-x-2">
+                    <span>Audit Ratio</span>
+                    <i class="ml-2 text-yellow-400 fas fa-balance-scale bounce"></i>
                 </h3>
-                <ul class="list-none" id="audit-info-list"></ul>
-                <div class="mt-3">
-                    <h4 class="text-lg">Total Audits Completed <i class="ml-1 fas fa-arrow-up"></i></h4>
-                    <div class="relative w-full bg-gray-200 h-2 mt-2 rounded">
-                        <div id="total-audits-done-progress" class="absolute h-2 bg-green-500" style="width: 70%;"></div>
+
+                Audit Ratio Section Styling
+                <div class="mt-4 bg-gray-800 rounded-lg p-4">
+                    <p class="text-lg text-gray-400 mb-2">Completed Audits / Received Audits</p>
+                    
+                    Audit Ratio Text with custom styling
+                    <h4 class="text-4xl font-extrabold text-green-400 mb-2" id="audit-ratio-text">3/5</h4>
+
+                    Custom Progress Bar
+                    <div class="relative h-4 w-full bg-gray-600 rounded-full">
+                        <div class="absolute left-0 top-0 h-full bg-green-400 rounded-full" style="width: 60%;"></div>
                     </div>
-                    <p class="text-md mt-2" id="total-audits-done-text"></p>
                 </div>
-                <div class="mt-3">
-                    <h4 class="text-lg">Total Audits Received <i class="ml-1 fas fa-arrow-down"></i></h4>
-                    <div class="relative w-full bg-muted-blue h-2 mt-2 rounded">
-                        <div id="total-audits-received-progress" class="absolute h-2 bg-blue-500" style="width: 50%;"></div>
-                    </div>
-                    <p class="text-md mt-2" id="total-audits-received-text"></p>
-                </div>
-                <div class="mt-3">
-                    <h4 class="text-lg">Audit Ratio</h4>
-                    <h4 class="text-xl font-semibold" id="audit-ratio-text"></h4>
-                </div>
-            </section>
+            </section> -->
         </main>
     </div>
 
+    <!-- JavaScript files -->
     <script type="module" src="profile.js"></script>
     <script src="https://d3js.org/d3.v7.min.js"></script>
 </body>
