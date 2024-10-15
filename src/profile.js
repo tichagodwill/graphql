@@ -238,5 +238,3 @@ const handleLogout = async () => {
     console.error('Logout error:', err);
   }
 };
-
-
