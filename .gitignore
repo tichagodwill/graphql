@@ -8,3 +8,4 @@ File paths:
 *.jar
 *.log
 .DS_Store
+.vercel
