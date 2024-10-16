@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.0.4/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
     <title>Dashboard Overview</title>
     <style>
         @keyframes bounce {
@@ -14,6 +15,11 @@
         }
         .bounce {
             animation: bounce 3s infinite;
+        }
+        /* Custom CSS for responsive SVGs */
+        .responsive-svg {
+            width: 100%;
+            height: auto;
         }
     </style>
 </head>
@@ -55,12 +61,12 @@
                     </h3>
                     <div class="mt-4 space-y-3">
                         <h4 class="text-lg text-white">Total Audits Completed</h4>
-                        <svg id="completed-audits-progress" width="100%" height="20"></svg>
+                        <svg id="completed-audits-progress" class="responsive-svg" height="20"></svg>
                         <p class="text-md text-white mt-2" id="completed-audits-text"></p>
                     </div>
                     <div class="mt-4 space-y-3">
                         <h4 class="text-lg text-white">Total Audits Received</h4>
-                        <svg id="received-audits-progress" width="100%" height="20"></svg>
+                        <svg id="received-audits-progress" class="responsive-svg" height="20"></svg>
                         <p class="text-md text-white mt-2" id="received-audits-text"></p>
                     </div>
                     <div class="mt-4">
@@ -93,7 +99,9 @@
     </div>
 
     <!-- JavaScript files -->
+    <script src="https://cdn.jsdelivr.net/npm/d3@7.8.3/dist/d3.min.js"></script>
+
     <script type="module" src="profile.js"></script>
-    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <!-- <script src="https://d3js.org/d3.v7.min.js"></script> -->
 </body>
 </html>
