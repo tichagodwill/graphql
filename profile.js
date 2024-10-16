@@ -15,7 +15,7 @@ const checkLogin = () => {
   const jwt = localStorage.getItem('token');
   if (!jwt) {
     // Redirect to login if token is not found
-    window.location.href = 'login.html';
+    window.location.href = 'index.html';
     return false;
   }
   return true;
@@ -26,7 +26,7 @@ let userId;
 const initialize = async () => {
   if (!checkLogin()) return; // Check login before proceeding
   
-  console.log('Initializing dashboard...');
+  console.log('Initialized dashboard...');
   try {
     userId = await fetchUserId();
     const userDetails = await fetchUserDetails(userId);
@@ -161,7 +161,7 @@ const setupEventListeners = () => {
 // Logout Functionality
 const handleLogout = async () => {
   localStorage.removeItem('token'); // Ensure token is removed
-  window.location.href = 'login.html'; // Redirect to login page
+  window.location.href = 'index.html'; // Redirect to login page
 };
 
 // Function to get data from a GraphQL API
