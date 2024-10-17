@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -24,9 +23,9 @@
         }
     </style>
 </head>
-<body class="bg-gray-900 text-gray-200">
+<body class="bg-gray-900 ">
     <div class="max-w-7xl mx-auto p-6">
-        <!--  Header -->
+        <!-- Header -->
         <header class="fixed top-0 left-0 right-0 z-10 bg-gray-800 bg-opacity-80 p-4 md:p-6 lg:p-8 shadow-lg rounded-lg">
             <div class="flex justify-between items-center">
                 <h2 class="text-lg md:text-2xl lg:text-3xl font-semibold text-white tracking-wider leading-tight" id="dashboard-welcome-message">Welcome</h2>
@@ -42,37 +41,40 @@
                     <h3 class="text-xl font-semibold text-white flex items-center space-x-2">
                         <span>User Information</span><i class="ml-2 text-yellow-400 fas fa-info-circle bounce"></i>
                     </h3>
-                    <ul class="list-none mt-4 space-y-2" id="user-info-container">
+                    <ul class=" text-white list-none mt-4 space-y-2" id="user-info-container">
                         <!-- Add content dynamically -->
                     </ul>
                 </div>
 
-                <!-- XP Info Card -->
-                <div class="bg-gray-700 shadow-lg rounded-lg p-6 transform hover:scale-105 hover:shadow-2xl hover:bg-gray-800 transition-all duration-300 ease-in-out border-l-4 border-blue-400">
-                    <h3 class="text-xl font-semibold text-white flex items-center space-x-2">
-                        <span>Your XP Level</span><i class="ml-2 text-yellow-400 fas fa-star bounce"></i>
-                    </h3>
-                    <p class="text-lg text-gray-300 mt-2" id="experience-points">You have <strong class="text-white">0 XP</strong>! Keep going!</p>
-                </div>
+                <!-- XP and Audit Info Cards -->
+                <div class="flex flex-col col-span-1 md:col-span-2 space-y-4">
+                    <!-- XP Info Card -->
+                    <div class="bg-gray-700 shadow-lg rounded-lg p-6 transform hover:scale-105 hover:shadow-2xl hover:bg-gray-800 transition-all duration-300 ease-in-out border-l-4 border-blue-400">
+                        <h3 class="text-xl font-semibold text-white flex items-center space-x-2">
+                            <span>Your XP Level</span><i class="ml-2 text-yellow-400 fas fa-star bounce"></i>
+                        </h3>
+                        <p class="text-lg text-gray-300 mt-2" id="experience-points">You have <strong class="text-white">0 XP</strong>! Keep going!</p>
+                    </div>
 
-                <!-- Audit Info Card -->
-                <div class="bg-gray-700 shadow-lg rounded-lg p-6 transform hover:scale-105 hover:shadow-2xl hover:bg-gray-800 transition-all duration-300 ease-in-out border-l-4 border-green-400">
-                    <h3 class="text-xl font-semibold text-white flex items-center space-x-2">
-                        <span>Audit Information</span><i class="ml-2 text-yellow-400 fas fa-file-alt bounce"></i>
-                    </h3>
-                    <div class="mt-4 space-y-3">
-                        <h4 class="text-lg text-white">Total Audits Completed</h4>
-                        <svg id="completed-audits-progress" class="responsive-svg" height="20"></svg>
-                        <p class="text-md text-white mt-2" id="completed-audits-text"></p>
-                    </div>
-                    <div class="mt-4 space-y-3">
-                        <h4 class="text-lg text-white">Total Audits Received</h4>
-                        <svg id="received-audits-progress" class="responsive-svg" height="20"></svg>
-                        <p class="text-md text-white mt-2" id="received-audits-text"></p>
-                    </div>
-                    <div class="mt-4">
-                        <h4 class="text-lg text-white">Audit Ratio</h4>
-                        <h4 class="text-xl font-semibold text-white" id="audit-ratio-value">3/5</h4>
+                    <!-- Audit Info Card -->
+                    <div class="bg-gray-700 shadow-lg rounded-lg p-6 transform hover:scale-105 hover:shadow-2xl hover:bg-gray-800 transition-all duration-300 ease-in-out border-l-4 border-green-400">
+                        <h3 class="text-xl font-semibold text-white flex items-center space-x-2">
+                            <span>Audit Information</span><i class="ml-2 text-yellow-400 fas fa-file-alt bounce"></i>
+                        </h3>
+                        <div class="mt-4 space-y-3">
+                            <h4 class="text-lg text-white">Total Audits Completed</h4>
+                            <svg id="completed-audits-progress" class="responsive-svg" height="20"></svg>
+                            <p class="text-md text-white mt-2" id="completed-audits-text"></p>
+                        </div>
+                        <div class="mt-4 space-y-3">
+                            <h4 class="text-lg text-white">Total Audits Received</h4>
+                            <svg id="received-audits-progress" class="responsive-svg" height="20"></svg>
+                            <p class="text-md text-white mt-2" id="received-audits-text"></p>
+                        </div>
+                        <div class="mt-4">
+                            <h4 class="text-lg text-white">Audit Ratio</h4>
+                            <h4 class="text-xl font-semibold text-white" id="audit-ratio-value">3/5</h4>
+                        </div>
                     </div>
                 </div>
             </section>
@@ -82,7 +84,7 @@
                 <h3 class="text-xl font-semibold text-white flex items-center space-x-2">
                     <span>Recent Activities</span><i class="ml-2 text-yellow-400 fas fa-history bounce"></i>
                 </h3>
-                <ul class="list-none mt-4" id="recent-activity-container"></ul>
+                <ul class="text-white list-none mt-4" id="recent-activity-container"></ul>
             </section>
 
             <!-- Skills Overview -->
@@ -101,8 +103,11 @@
 
     <!-- JavaScript files -->
     <script src="https://cdn.jsdelivr.net/npm/d3@7.8.3/dist/d3.min.js"></script>
-
-    <script type="module" src="profile.js"></script>
-    <!-- <script src="https://d3js.org/d3.v7.min.js"></script> -->
+    <script type="module" src="profile.js">
+         window.history.forward();
+        function noBack() {
+            window.history.forward();
+        }
+    </script>
 </body>
 </html>
