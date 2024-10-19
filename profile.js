@@ -31,7 +31,7 @@ const initialize = async () => {
     userId = await fetchUserId();
     const userDetails = await fetchUserDetails(userId);
     
-    displayUserInfo(userDetails);
+    displayUserInfo(userDetails);  // Display user info after fetching
     await loadData(userId);
     setupEventListeners();
   } catch (error) {
@@ -46,7 +46,7 @@ const loadData = async (userId) => {
       fetchAndDisplayRecentProjects(),
       refreshProgressBars(userId),
       fetchAndDisplayExperience(userId),
-      fetchAndDisplaySkills(userId)  // Pass userId if needed
+      fetchAndDisplaySkills()  // No need to pass userId if not used
     ]);
   } catch (error) {
     console.error('Data loading error:', error);
@@ -81,6 +81,7 @@ const fetchAndDisplayRecentProjects = async () => {
 
 const fetchAndDisplayExperience = async (userId) => {
   const { data } = await getData(fetchExperienceQuery(userId));
+  console.log('Response data:', data); 
   const experiencePoints = data.transaction_aggregate.aggregate.sum.amount || 0;
   
   document.getElementById('experience-points').textContent = experiencePoints >= 999900 
@@ -110,13 +111,25 @@ const fetchAndDisplaySkills = async () => {
 
 // Data Display Functions
 const displayUserInfo = (userDetails) => {
+  // Format date of birth
+  const dateOfBirth = new Date(userDetails.attrs.dateOfBirth);
+  const formattedDOB = dateOfBirth.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+  
   const userInfoContainer = document.getElementById('user-info-container');
   userInfoContainer.innerHTML = `
     <li>First Name: ${userDetails.firstName}</li>
     <li>Last Name: ${userDetails.lastName}</li>
+    <li>Gender: ${userDetails.attrs.gender || '-'}</li>
     <li>Email: ${userDetails.email}</li>
     <li>Campus: ${userDetails.campus}</li>
     <li>Campus ID: ${userDetails.login}</li>
+    <li>Phone: ${userDetails.attrs.Phone || '-'}</li>
+    <li> Emergency Contact: ${userDetails.attrs.emergencyTel || '-'}</li>
+    <li>CPR number: ${userDetails.attrs.CPRnumber || '-'}</li>
+    <li>DOB: ${formattedDOB}</li>
+    <li>POB: ${userDetails.attrs.placeOfBirth || '-'}</li>
+    <li> Counntry of Birth: ${userDetails.attrs.countryOfBirth || '-'}</li>
+
   `;
 
   document.getElementById('dashboard-welcome-message').textContent = 

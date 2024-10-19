@@ -15,6 +15,7 @@ export const fetchUserDetailsQuery = (userId) => `
       email
       firstName
       lastName
+      attrs
     }
   }
 `;
