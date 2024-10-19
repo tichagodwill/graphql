@@ -46,7 +46,7 @@ const loadData = async (userId) => {
       fetchAndDisplayRecentProjects(),
       refreshProgressBars(userId),
       fetchAndDisplayExperience(userId),
-      fetchAndDisplaySkills()  // No need to pass userId if not used
+      fetchAndDisplaySkills() 
     ]);
   } catch (error) {
     console.error('Data loading error:', error);
@@ -124,16 +124,26 @@ const displayUserInfo = (userDetails) => {
     <li>Campus: ${userDetails.campus}</li>
     <li>Campus ID: ${userDetails.login}</li>
     <li>Phone: ${userDetails.attrs.Phone || '-'}</li>
-    <li> Emergency Contact: ${userDetails.attrs.emergencyTel || '-'}</li>
+    <li>Emergency Contact: ${userDetails.attrs.emergencyTel || '-'}</li>
     <li>CPR number: ${userDetails.attrs.CPRnumber || '-'}</li>
     <li>DOB: ${formattedDOB}</li>
     <li>POB: ${userDetails.attrs.placeOfBirth || '-'}</li>
-    <li> Counntry of Birth: ${userDetails.attrs.countryOfBirth || '-'}</li>
-
+    <li>Country of Birth: ${userDetails.attrs.countryOfBirth || '-'}</li>
   `;
 
-  document.getElementById('dashboard-welcome-message').textContent = 
-    `Welcome to your dashboard, ${userDetails.firstName} ${userDetails.lastName}`;
+  const gender = userDetails.attrs.gender.toLowerCase();
+  let welcomeMessage = `Welcome to your dashboard, `;
+  
+  // Add Mr. or Mrs. based on gender
+  if (gender === 'male') {
+    welcomeMessage += `Mr. ${userDetails.firstName} ${userDetails.lastName}`;
+  } else if (gender === 'female') {
+    welcomeMessage += `Mrs. ${userDetails.firstName} ${userDetails.lastName}`;
+  } else {
+    welcomeMessage += `${userDetails.firstName} ${userDetails.lastName}`;
+  }
+
+  document.getElementById('dashboard-welcome-message').textContent = welcomeMessage;
 };
 
 // Progress Bar Functions
